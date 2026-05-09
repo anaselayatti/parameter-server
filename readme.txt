@@ -1,1 +1,0 @@
-echo "# Parameter Server - Système Distribué" > README.md
