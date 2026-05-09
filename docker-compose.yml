@@ -1,0 +1,38 @@
+version: '3'
+services:
+  parameter-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "9999:9999"
+
+  worker1:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - WORKER_ID=1
+      - SERVER_HOST=parameter-server
+    depends_on:
+      - parameter-server
+
+  worker2:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - WORKER_ID=2
+      - SERVER_HOST=parameter-server
+    depends_on:
+      - parameter-server
+
+  worker3:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - WORKER_ID=3
+      - SERVER_HOST=parameter-server
+    depends_on:
+      - parameter-server
